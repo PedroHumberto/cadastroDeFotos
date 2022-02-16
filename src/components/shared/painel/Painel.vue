@@ -43,7 +43,7 @@ export default {
     text-align: center;
     border: solid 2px;
     background: lightblue;
-    margin: 0 0 15px 0;
+    margin: 0px;
     padding: 10px;
     text-transform: uppercase;
   }
@@ -63,6 +63,11 @@ export default {
  .painel-fade-enter-active, .painel-fade-leave-active {
 
      transition: opacity .4s;
+ }
+ 
+ /*impede a sobreposição da imagem dentro do painel*/
+ .painel-conteudo{
+     overflow: hidden;
  }
 
 </style>
