@@ -5,7 +5,10 @@
     <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="filtre por parte do título">
 
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto in fotosComFiltro" :key="foto.titulo">
+      <li 
+      class="lista-fotos-item" 
+      v-for="foto in fotosComFiltro" 
+      :key="foto.titulo">
 
         <meu-painel :titulo="foto.titulo">
             <imagem-responsiva v-meu-transform:scale.animate="1.1" :url="foto.url" :titulo="foto.titulo"/>
@@ -33,7 +36,7 @@ export default {
   components: {
     'meu-painel' : Painel, 
     'imagem-responsiva': ImagemResponsiva,
-    'meu-botao' : Botao
+    'meu-botao': Botao
   },
   directives: {
     'meu-transform': transform
@@ -49,10 +52,7 @@ export default {
   methods: {
     
     remove(foto){
-      
-        
         alert('Remover a foto ' + foto.titulo)
-      
     }
 
   },
@@ -76,8 +76,7 @@ export default {
 </script>
 
 <style>
-
-  .centralizado {
+.centralizado {
 
     text-align: center;
   }

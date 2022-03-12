@@ -2,10 +2,7 @@
   <div class="corpo">
 
     <meu-menu :rotas="routes"/>
-
-    <transition name="pagina">
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 
