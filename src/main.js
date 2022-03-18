@@ -6,6 +6,7 @@ import { routes } from './routes';
 import './components/directives/Transform';
 
 Vue.use(VueResource);/*Para usar a chamada HTTP na API*/
+Vue.http.options.root = 'http://localhost:3000'
 Vue.use(VueRouter);
 
 const router = new VueRouter({ 
