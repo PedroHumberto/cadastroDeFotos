@@ -21,13 +21,21 @@
             :url="foto.url"
             :titulo="foto.titulo"
           />
-          <meu-botao
+          <router-link :to="{ name: 'altera', params: { id: foto._id } }">
+            <meu-botao
+              tipo="button"
+              rotulo="ALTERAR"
+              />
+          </router-link>
+
+            <meu-botao
             tipo="button"
             rotulo="remover"
             @botaoAtivado="remove(foto)"
             :confirmacao="true"
             estilo="perigo"
-          />
+            />
+          
         </meu-painel>
       </li>
     </ul>
@@ -116,7 +124,10 @@ export default {
       .lista()
       .then(
         (fotos) => (this.fotos = fotos),
-        (err) => console.log(err)
+        (err) => {
+          console.log(err)
+          this.mensagem = 'Não foi possivel obter as fotos'
+          }
       );
 
     /*

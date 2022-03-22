@@ -3,12 +3,15 @@
 Sistema feito durante as aulas de Vue.JS de cadastro de fotos.
 Nele foi aplicado conhecimentos sobre diretivas, uso de vue-router, services, resource.
 
+Dependencias:
+* Vee Validate
+* Vuex
+* Vue Router
 
 [API Usada](https://github.com/PedroHumberto/apiFotosAlura)
 
 
 <img src="/fotos/telainicial.png">
-
 
 
 

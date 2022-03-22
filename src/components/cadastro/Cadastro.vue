@@ -1,18 +1,21 @@
 <template>
   <div>
-    <h1 class="centralizado">Cadastro</h1>
-    <h2 class="centralizado"></h2>
+    <h2 v-if="foto._id" class="centralizado">Altere os dados</h2>
+    <h2 v-else class="centralizado">Cadastro</h2>
+    
 
     <form @submit.prevent="grava()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo">
+        <input data-vv-as="título" name="titulo" v-validate data-vv-rules="required|min:3|max:25" id="titulo" autocomplete="off" v-model="foto.titulo">
+        <span v-show="errors.has('titulo')">{{ errors.first('titulo') }}</span>
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input id="url" autocomplete="off" v-model.lazy="foto.url">
+        <input name="url" v-validate data-vv-rules='required' id="url" autocomplete="off" v-model="foto.url">
         <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.url"/>
+        <span v-show="errors.has('url')">*URL Obrigatorio</span>
       </div>
 
       <div class="controle">
@@ -44,7 +47,8 @@ export default {
 
   data() {
     return {
-      foto: new Foto()
+      foto: new Foto(),
+      id: this.$route.params.id
     }
   },
   methods: {
@@ -52,11 +56,19 @@ export default {
 
     grava(){
 
+      this.$validator
+        .validateAll()
+        .then(success => {
+          if(success){
+            this.service.cadastra(this.foto)
+              .then(() => {
+                if(this.id) this.$router.push({ name: 'home' })
+                this.foto = new Foto()
+              })
+              .catch(err => console.log(err))
+          }
+        })
 
-
-      this.service.cadastra(this.foto)
-        .then(() => this.foto = new Foto())
-        .catch(err => console.log(err))
 
       /*
       this.resource.save(this.foto)
@@ -73,6 +85,11 @@ export default {
   },
   created(){
     this.service = new FotoService(this.$resource)
+
+    if(this.id){
+      this.service.busca(this.id)
+      .then(foto => this.foto = foto)
+    }
   }
 }
 
